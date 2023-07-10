@@ -12,6 +12,7 @@
             <li>
                 <h3><%= tarefa.title %></h3>
                 <p><%= tarefa.description %></p>
+                <a href="/tarefa/?id=<%= tarefa.idTarefa %>">Editar tarefa</a>
             </li>
         <% }); %>
     </ul>
@@ -19,7 +20,7 @@
     <form action="/tarefa" method="POST">
         <input type="text" name="title" placeholder="Nome da tarefa...">
         <input type="text" name="description" placeholder="Descrição da tarefa...">
-        <button type="submit">Adicionar</button>
+        <button type="submit">Adicionar Tarefa</button>
     </form>
 </body>
 </html>
