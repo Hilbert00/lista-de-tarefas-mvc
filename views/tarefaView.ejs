@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-</head>
-<body>
-    <h1>Lista de Tarefas</h1>
-    <ul>
-        <% tarefas.forEach((tarefa) => { %>
-            <li>
-                <h3><%= tarefa.title %></h3>
-                <p><%= tarefa.description %></p>
-                <a href="/tarefa/?id=<%= tarefa.idTarefa %>">Editar tarefa</a>
-            </li>
-        <% }); %>
-    </ul>
+<form action="/tarefa" method="POST">
+    <input type="text" name="title" placeholder="Nome da tarefa...">
+    <input type="text" name="description" placeholder="Descrição da tarefa...">
+    <button type="submit">Adicionar Tarefa</button>
+</form>
 
-    <form action="/tarefa" method="POST">
-        <input type="text" name="title" placeholder="Nome da tarefa...">
-        <input type="text" name="description" placeholder="Descrição da tarefa...">
-        <button type="submit">Adicionar Tarefa</button>
-    </form>
-</body>
-</html>
+<ul>
+    <% tarefas.forEach((tarefa) => { %>
+        <li>
+            <h3><%= tarefa.title %></h3>
+            <p><%= tarefa.description %></p>
+            <a href="/tarefa/?id=<%= tarefa.idTarefa %>">Editar tarefa</a>
+        </li>
+    <% }); %>
+</ul>

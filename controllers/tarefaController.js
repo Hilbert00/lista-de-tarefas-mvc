@@ -9,6 +9,9 @@ function getTarefas(req, res) {
 
 function getTarefa(req, res) {
     const { id } = req.query;
+    
+    if (!id) return res.sendStatus(404);
+
     Database.query(`SELECT * FROM tarefas WHERE idTarefa = ${id};`, (response) => {
         if (response.length) return res.render("editView", { tarefa: response[0] });
         return res.redirect("/tarefas");

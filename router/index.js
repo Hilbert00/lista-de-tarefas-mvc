@@ -2,7 +2,7 @@ const router = require("express").Router();
 const tarefaController = require("../controllers/tarefaController");
 
 // Tela inicial
-router.get("/", (_req, res) => res.send("<h1>Lista de Tarefas</h1>"));
+router.get("/", (_req, res) => res.render("startView"));
 
 // Visualizar tarefas
 router.get("/tarefas", tarefaController.getTarefas);

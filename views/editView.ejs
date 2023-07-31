@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-</head>
-<body>
-    <h1>Editar Tarefa</h1>
-    <form method="POST" style="display: inline-block; margin-right: 20px;">
-        <input type="hidden" name="id" value="<%= tarefa.idTarefa %>">
+<h2>Editar Tarefa</h2>
+<form method="POST">
+    <input type="hidden" name="id" value="<%= tarefa.idTarefa %>">
 
-        <div style="display: block; margin-bottom: 20px;">
-            <label for="title">Título da tarefa:</label>
-            <input type="text" name="title" value="<%= tarefa.title %>">
-        </div>
-        
-        <div style="display: block; margin-bottom: 20px;">
-            <label for="description">Descrição da tarefa:</label>
-            <input type="text" name="description" value="<%= tarefa.description %>">
-        </div>
+    <div>
+        <label for="title">Título da tarefa:</label>
+        <input type="text" name="title" value="<%= tarefa.title %>">
+    </div>
+    
+    <div>
+        <label for="description">Descrição da tarefa:</label>
+        <input type="text" name="description" value="<%= tarefa.description %>">
+    </div>
 
-        <button type="submit" formaction="/tarefa/update">Editar</button>
-        <button type="submit" formaction="/tarefa/delete">Excluir</button>
-    </form>
-</body>
-</html>
+    <button type="submit" formaction="/tarefa/update">Editar</button>
+    <button type="submit" formaction="/tarefa/delete">Excluir</button>
+    <button type="button"><a href="/tarefas">Cancelar</a></button>
+</form>
