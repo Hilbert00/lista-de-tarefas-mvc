@@ -5,7 +5,7 @@ class Database {
         return mysql.createConnection({
             host: "localhost",
             user: "root",
-            database: "todolist"
+            database: "todolist",
         });
     }
 

@@ -1,18 +1,22 @@
 <h2>Editar Tarefa</h2>
 <form method="POST">
-    <input type="hidden" name="id" value="<%= tarefa.idTarefa %>">
+    <input type="hidden" name="id" value="<%= tarefa.idTarefa %>" />
 
     <div>
         <label for="title">Título da tarefa:</label>
-        <input type="text" name="title" value="<%= tarefa.title %>">
-    </div>
-    
-    <div>
-        <label for="description">Descrição da tarefa:</label>
-        <input type="text" name="description" value="<%= tarefa.description %>">
+        <input type="text" name="title" value="<%= tarefa.title %>" />
     </div>
 
-    <button type="submit" formaction="/tarefa/update">Editar</button>
+    <div>
+        <label for="description">Descrição da tarefa:</label>
+        <input
+            type="text"
+            name="description"
+            value="<%= tarefa.description %>"
+        />
+    </div>
+
+    <button type="submit" formaction="/tarefa/update">Salvar</button>
     <button type="submit" formaction="/tarefa/delete">Excluir</button>
     <button type="button"><a href="/tarefas">Cancelar</a></button>
 </form>

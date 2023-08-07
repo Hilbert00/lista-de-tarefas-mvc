@@ -1,5 +1,5 @@
 const Tarefa = require("../models/tarefaModel.js");
-const Database = require("../models/databaseModel.js")
+const Database = require("../models/databaseModel.js");
 
 function getTarefas(req, res) {
     Database.query("SELECT * FROM tarefas;", (response) => {
@@ -9,13 +9,17 @@ function getTarefas(req, res) {
 
 function getTarefa(req, res) {
     const { id } = req.query;
-    
+
     if (!id) return res.sendStatus(404);
 
-    Database.query(`SELECT * FROM tarefas WHERE idTarefa = ${id};`, (response) => {
-        if (response.length) return res.render("editView", { tarefa: response[0] });
-        return res.redirect("/tarefas");
-    });
+    Database.query(
+        `SELECT * FROM tarefas WHERE idTarefa = ${id};`,
+        (response) => {
+            if (response.length)
+                return res.render("editView", { tarefa: response[0] });
+            return res.redirect("/tarefas");
+        }
+    );
 }
 
 function addTarefa(req, res) {
@@ -30,20 +34,22 @@ function addTarefa(req, res) {
         `INSERT INTO tarefas (title, description, date) VALUES ('${tarefa.title}', '${tarefa.description}', '${tarefa.date}');`,
         (_response) => {
             res.redirect("/tarefas");
-    });
+        }
+    );
 }
 
-async function deleteTarefa(req, res){
+async function deleteTarefa(req, res) {
     const { id } = req.body;
 
     Database.query(
         `DELETE FROM tarefas WHERE idTarefa = ${id};`,
         (_response) => {
             res.redirect("/tarefas");
-    });
+        }
+    );
 }
 
-async function updateTarefa(req, res){
+async function updateTarefa(req, res) {
     const { id, title, description } = req.body;
     const tarefa = new Tarefa(title, description);
 
@@ -51,7 +57,14 @@ async function updateTarefa(req, res){
         `UPDATE tarefas SET title = '${tarefa.title}', description = '${tarefa.description}' WHERE idTarefa = ${id};`,
         (_response) => {
             res.redirect("/tarefas");
-    });
+        }
+    );
 }
 
-module.exports = { getTarefas, getTarefa, addTarefa, deleteTarefa, updateTarefa };
+module.exports = {
+    getTarefas,
+    getTarefa,
+    addTarefa,
+    deleteTarefa,
+    updateTarefa,
+};

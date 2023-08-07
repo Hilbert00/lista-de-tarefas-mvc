@@ -8,6 +8,11 @@ main {
     padding: 5px;
 }
 
+main h1 {
+    margin: 2rem 0;
+    text-align: center;
+}
+
 header {
     background-color: black;
     color: white;
@@ -15,7 +20,7 @@ header {
 }
 
 footer {
-    background-color:black;
+    background-color: black;
     bottom: 0;
     color: white;
     display: flex;
@@ -57,4 +62,27 @@ form {
 form > div {
     display: block;
     margin-bottom: 20px;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 30rem;
+    margin: 4rem auto;
+}
+
+#loginForm div {
+    display: flex;
+    gap: 2rem;
+}
+
+#loginForm label {
+    display: inline-block;
+    width: 25%;
+}
+
+#loginForm input,
+#loginForm button {
+    flex: 1;
 }
