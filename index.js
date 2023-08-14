@@ -7,11 +7,14 @@ const app = express();
 const tarefaController = require("./controllers/tarefaController");
 const usuarioController = require("./controllers/usuarioController");
 
+const verificarUsuario = require("./middlewares/verificarUsuario");
+
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
 app.set("layout", "./layouts/index");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+app.use(verificarUsuario);
 
 // Tela inicial
 app.get("/", (_req, res) => res.render("startView"));

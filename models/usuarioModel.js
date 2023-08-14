@@ -23,10 +23,7 @@ class Usuario {
         Database.query(
             `INSERT INTO usuarios (email, username, password) VALUES ('${email}', '${username}', '${md5(
                 password
-            )}');`,
-            (_response) => {
-                res.redirect("/tarefas");
-            }
+            )}');`
         );
     }
 }

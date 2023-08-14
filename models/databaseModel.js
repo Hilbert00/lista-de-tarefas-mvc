@@ -14,7 +14,7 @@ class Database {
 
         connection.query(sql, (err, res) => {
             if (err) console.error(err);
-            callback(res);
+            if (callback) callback(res);
         });
     }
 }
