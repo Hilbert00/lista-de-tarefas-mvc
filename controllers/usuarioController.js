@@ -1,13 +1,18 @@
 const Usuario = require("../models/usuarioModel.js");
 
-async function autenticarUsuario(req, res) {
+function autenticarUsuario(req, res) {
     const { username, password } = req.body;
 
     if (!username || !password) return res.sendStatus(404);
 
-    Usuario.autenticar(username, password);
+    Usuario.autenticar(username, password, (data) => {
+        if (data?.idUsuario) {
+            req.session.user = data;
 
-    res.redirect("/tarefas");
+            return res.redirect("/tarefas");
+        }
+        return res.redirect("/");
+    });
 }
 
 function cadastrarUsuario(req, res) {

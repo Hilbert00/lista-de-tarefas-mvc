@@ -3,9 +3,10 @@ const mysql = require("mysql2");
 class Database {
     static connect() {
         return mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            database: "todolist",
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            database: process.env.DB_NAME,
+            password: process.env.DB_PASS,
         });
     }
 

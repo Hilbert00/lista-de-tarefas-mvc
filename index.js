@@ -1,5 +1,9 @@
+require("dotenv").config();
+
+const path = require("path");
 const express = require("express");
 const expressEjsLayouts = require("express-ejs-layouts");
+const session = require("express-session");
 
 const PORT = 3000;
 const app = express();
@@ -7,29 +11,48 @@ const app = express();
 const tarefaController = require("./controllers/tarefaController");
 const usuarioController = require("./controllers/usuarioController");
 
-const verificarUsuario = require("./middlewares/verificarUsuario");
+function verificarUsuario(req, res, next) {
+    if (req.originalUrl === "/login" || req.originalUrl === "/cadastro") {
+        app.set("layout", "./layouts/login");
 
+        res.locals.layoutVariables = {
+            url: process.env.URL,
+            img: "/img/",
+            style: "/stylesheets/",
+            title: "Autenticação",
+        };
+
+        next();
+    } else if (req?.session?.user) {
+        app.set("layout", "./layouts/index");
+
+        res.locals.layoutVariables = {
+            url: process.env.URL,
+            img: "/img/",
+            style: "/stylesheets/",
+            title: "Lista de Tarefas",
+            user: req.session.user,
+        };
+
+        next();
+    } else res.redirect("/login");
+}
+
+app.use(session({ secret: process.env.SECRET }));
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
-app.set("layout", "./layouts/index");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(verificarUsuario);
 
 // Tela inicial
 app.get("/", (_req, res) => res.render("startView"));
 
 // Formulário de login
-app.get("/login", (_req, res) => {
-    app.set("layout", "./layouts/login");
-    res.render("loginView");
-});
+app.get("/login", (_req, res) => res.render("loginView"));
 
 // Formulário de cadastro
-app.get("/cadastro", (_req, res) => {
-    app.set("layout", "./layouts/login");
-    res.render("cadastroView");
-});
+app.get("/cadastro", (_req, res) => res.render("cadastroView"));
 
 // Login do usuário
 app.post("/login", usuarioController.autenticarUsuario);

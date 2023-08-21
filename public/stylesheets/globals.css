@@ -14,8 +14,11 @@ main h1 {
 }
 
 header {
+    align-items: center;
     background-color: black;
     color: white;
+    display: flex;
+    justify-content: space-between;
     padding: 5px;
 }
 

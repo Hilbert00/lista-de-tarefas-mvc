@@ -8,13 +8,16 @@ class Usuario {
         this.password = password;
     }
 
-    static autenticar(username, password) {
+    static autenticar(username, password, callback) {
         Database.query(
             `SELECT * FROM usuarios WHERE username = '${username}' AND password = '${md5(
                 password
             )}';`,
             (response) => {
-                console.log(JSON.parse(JSON.stringify(response)));
+                const data = JSON.parse(JSON.stringify(response));
+
+                if (!data.length) return callback({});
+                return callback(data[0]);
             }
         );
     }
