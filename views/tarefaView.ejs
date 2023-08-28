@@ -1,19 +1,5 @@
-<form action="/tarefa" method="POST">
-    <input type="text" name="title" placeholder="Nome da tarefa..." />
-    <input
-        type="text"
-        name="description"
-        placeholder="Descrição da tarefa..."
-    />
-    <button type="submit">Adicionar Tarefa</button>
-</form>
+<h2><%= tarefa.title %></h2>
 
-<ul>
-    <% tarefas.forEach((tarefa) => { %>
-    <li>
-        <h3><%= tarefa.title %></h3>
-        <p><%= tarefa.description %></p>
-        <a href="/tarefa/?id=<%= tarefa.idTarefa %>">Editar tarefa</a>
-    </li>
-    <% }); %>
-</ul>
+<p><%= tarefa.description %></p>
+
+<a href="/tarefas">Voltar</a>

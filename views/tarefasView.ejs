@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between">
+    <form
+        action="/tarefa"
+        method="POST"
+        class="d-flex flex-column gap-4"
+        style="width: 48%"
+    >
+        <h2 class="text-center">Nova Tarefa</h2>
+        <input type="text" name="title" placeholder="Nome da tarefa..." />
+        <input
+            type="text"
+            name="description"
+            placeholder="Descrição da tarefa..."
+        />
+        <button type="submit" class="btn btn-outline-success">
+            Adicionar Tarefa
+        </button>
+    </form>
+
+    <div class="d-flex flex-column gap-3" style="width: 48%">
+        <h2 class="text-center">Tarefas</h2>
+
+        <% tarefas.forEach((tarefa) => { %>
+        <div
+            class="d-flex align-items-center justify-content-between border-secondary-subtle p-1 border-1 border"
+        >
+            <a
+                class="text-decoration-none h2"
+                href="/tarefa/<%= tarefa.idTarefa %>"
+                ><%= tarefa.title %></a
+            >
+
+            <div class="d-flex">
+                <form method="POST" action="/tarefa/delete" class="me-2">
+                    <input
+                        type="hidden"
+                        name="id"
+                        value="<%= tarefa.idTarefa %>"
+                    />
+                    <button type="submit" class="btn p-0">
+                        <i class="bi bi-trash3 h3 text-danger"></i>
+                    </button>
+                </form>
+                <a
+                    href="/tarefa/editar/<%= tarefa.idTarefa %>"
+                    style="color: inherit"
+                    ><i class="bi bi-pencil-square h3 text-primary"></i
+                ></a>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>

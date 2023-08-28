@@ -1,22 +1,22 @@
-<h2>Editar Tarefa</h2>
-<form method="POST">
+<h2 class="text-center">Editar Tarefa</h2>
+<form method="POST" class="d-flex flex-column align-items-center gap-4">
     <input type="hidden" name="id" value="<%= tarefa.idTarefa %>" />
 
-    <div>
+    <div class="d-flex flex-column w-50">
         <label for="title">Título da tarefa:</label>
         <input type="text" name="title" value="<%= tarefa.title %>" />
     </div>
 
-    <div>
+    <div class="d-flex flex-column w-50">
         <label for="description">Descrição da tarefa:</label>
-        <input
-            type="text"
-            name="description"
-            value="<%= tarefa.description %>"
-        />
+        <textarea name="description" cols="30" rows="10" style="resize: none">
+<%= tarefa.description %></textarea
+        >
     </div>
 
-    <button type="submit" formaction="/tarefa/update">Salvar</button>
-    <button type="submit" formaction="/tarefa/delete">Excluir</button>
-    <button type="button"><a href="/tarefas">Cancelar</a></button>
+    <button type="submit" formaction="/tarefa/update" class="btn btn-success px-5">
+        Salvar
+    </button>
+
+    <a href="/tarefas">Voltar</a>
 </form>

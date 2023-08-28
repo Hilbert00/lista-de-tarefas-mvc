@@ -6,11 +6,8 @@ function autenticarUsuario(req, res) {
     if (!username || !password) return res.sendStatus(404);
 
     Usuario.autenticar(username, password, (data) => {
-        if (data?.idUsuario) {
-            req.session.user = data;
+        if (data?.idUsuario) req.session.user = data;
 
-            return res.redirect("/tarefas");
-        }
         return res.redirect("/");
     });
 }
@@ -22,7 +19,7 @@ function cadastrarUsuario(req, res) {
 
     Usuario.cadastrar(email, username, password);
 
-    res.redirect("/tarefas");
+    res.redirect("/");
 }
 
 module.exports = {

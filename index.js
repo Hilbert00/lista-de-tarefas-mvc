@@ -34,11 +34,22 @@ function verificarUsuario(req, res, next) {
             user: req.session.user,
         };
 
+        if (req.session.msg) {
+            res.locals.layoutVariables.msg = req.session.msg;
+            delete req.session.msg;
+        }
+
         next();
     } else res.redirect("/login");
 }
 
-app.use(session({ secret: process.env.SECRET }));
+app.use(
+    session({
+        secret: process.env.SECRET,
+        resave: true,
+        saveUninitialized: false,
+    })
+);
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -64,7 +75,10 @@ app.post("/cadastro", usuarioController.cadastrarUsuario);
 app.get("/tarefas", tarefaController.getTarefas);
 
 // Visualizar tarefa
-app.get("/tarefa", tarefaController.getTarefa);
+app.get("/tarefa/:id", tarefaController.getTarefa);
+
+// Visualizar tarefa
+app.get("/tarefa/editar/:id", tarefaController.editTarefa);
 
 // Publicar tarefa
 app.post("/tarefa", tarefaController.addTarefa);

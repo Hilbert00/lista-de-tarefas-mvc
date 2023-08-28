@@ -2,17 +2,31 @@ const Tarefa = require("../models/tarefaModel.js");
 const Database = require("../models/databaseModel.js");
 
 function getTarefas(req, res) {
-    console.log(req.session.user)
     Database.query(
         `SELECT * FROM tarefas WHERE idUsuario = ${req.session.user.idUsuario};`,
         (response) => {
-            res.render("tarefaView", { tarefas: response });
+            res.render("tarefasView", { tarefas: response });
         }
     );
 }
 
 function getTarefa(req, res) {
-    const { id } = req.query;
+    const { id } = req.params;
+
+    if (!id) return res.sendStatus(404);
+
+    Database.query(
+        `SELECT * FROM tarefas WHERE idTarefa = ${id} AND idUsuario = ${req.session.user.idUsuario};`,
+        (response) => {
+            if (response.length)
+                return res.render("tarefaView", { tarefa: response[0] });
+            return res.redirect("/tarefas");
+        }
+    );
+}
+
+function editTarefa(req, res) {
+    const { id } = req.params;
 
     if (!id) return res.sendStatus(404);
 
@@ -68,6 +82,7 @@ async function updateTarefa(req, res) {
 module.exports = {
     getTarefas,
     getTarefa,
+    editTarefa,
     addTarefa,
     deleteTarefa,
     updateTarefa,
